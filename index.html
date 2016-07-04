@@ -27,6 +27,9 @@
 
       function draw(){
 
+        // Clear the previous rectangle.
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
         // Draw a ball.
         ctx.beginPath();
           ctx.arc(x, y, 10, 0, Math.PI*2);
