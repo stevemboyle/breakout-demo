@@ -16,6 +16,12 @@
 
       // Store the 2D rendering context.
       var ctx = canvas.getContext("2d");
+
+      ctx.beginPath();
+        ctx.rect(20, 40, 50, 50); // Define a rectangle. Top left corner coordinates, width, height.
+        ctx.fillStyle = "#FF0000"; // Provide a color.
+        ctx.fill(); // Paint the square.
+      ctx.closePath();
     </script>
   </body>
 </html>
