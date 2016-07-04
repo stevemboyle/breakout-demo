@@ -98,9 +98,18 @@
           dx = -dx;
         }
 
-        // Bounce the Ball off of the top and bottom walls.
-        if ( y + dy > canvas.height - ballRadius || y + dy < ballRadius ) {
+        // Bounce the Ball off of the top wall.
+        if ( y + dy < ballRadius ) {
           dy = -dy;
+        } else if ( y + dy > canvas.height - ballRadius ) {
+          // If the Ball hits the Paddle, it bounces.
+          if ( x > paddleX && x < paddleX + paddleWidth){
+            dy = -dy;
+          } else {
+            // If the Ball hits the bottom, the game is over.
+            alert("GAME OVER");
+            document.location.reload();
+          }
         }
 
         if ( rightPressed && paddleX < canvas.width - paddleWidth ) {
