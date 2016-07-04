@@ -47,6 +47,26 @@
         var paddleX = ( canvas.width - paddleWidth ) / 2;
 
       //---------------------------------------------------------------------
+      // VARIABLES FOR THE BRICK
+      //---------------------------------------------------------------------
+
+        var brickRowCount = 3;
+        var brickColumnCount = 5;
+        var brickWidth = 75;
+        var brickHeight = 20;
+        var brickPadding = 10;
+        var brickOffsetTop = 30;
+        var brickOffsetLeft = 30;
+
+        var bricks = [];
+        for ( column = 0; column < brickColumnCount; column++ ) {
+          bricks[column] = [];
+          for ( row = 0; row < brickRowCount; row++ ) {
+            bricks[column][row] = { x: 0, y: 0 };
+          }
+        }
+
+      //---------------------------------------------------------------------
       // SETTING UP EVENT HANDLERS FOR PADDLE MOVEMENT
       //---------------------------------------------------------------------
 
@@ -107,6 +127,28 @@
         }
 
       //---------------------------------------------------------------------
+      // DRAW THE BRICKS
+      //---------------------------------------------------------------------
+
+        function drawBricks(){
+          for ( column = 0; column < brickColumnCount; column++ ){
+            for ( row = 0; row < brickRowCount; row++ ){
+
+              var brickX = ( column * ( brickWidth + brickPadding ) ) + brickOffsetLeft;
+              var brickY = ( row * ( brickHeight + brickPadding ) ) + brickOffsetTop;
+              bricks[column][row].x = brickX;
+              bricks[column][row].y = brickY;
+
+              ctx.beginPath();
+                ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                ctx.fillStyle = "#0095DD";
+                ctx.fill();
+              ctx.closePath();
+            }
+          }
+        }
+
+      //---------------------------------------------------------------------
       // RENDER THE GAME
       //---------------------------------------------------------------------
 
@@ -120,6 +162,9 @@
 
           // Draw the Paddle.
           drawPaddle();
+
+          // Draw the Bricks.
+          drawBricks();
 
           // Bounce the Ball off of the left and right walls.
           if ( x + dx > canvas.width - ballRadius || x + dx < ballRadius ) {
