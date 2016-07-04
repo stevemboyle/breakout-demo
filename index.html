@@ -18,9 +18,15 @@
       var ctx = canvas.getContext("2d");
 
       ctx.beginPath();
-        ctx.rect(20, 40, 50, 50); // Define a rectangle. Top left corner coordinates, width, height.
-        ctx.fillStyle = "#FF0000"; // Provide a color.
-        ctx.fill(); // Paint the square.
+        // x coordinate of arc's center
+        // y coordinate of arc's center
+        // start angle
+        // end angle
+        // direction (false for clockwise);
+        ctx.arc(240, 160, 20, 0, Math.PI*2, false);
+        ctx.fillStyle = "green";
+        ctx.fill();
+
       ctx.closePath();
     </script>
   </body>
