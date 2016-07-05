@@ -22,6 +22,13 @@
         // Store the 2D rendering context.
         var ctx = canvas.getContext("2d");
 
+
+      //---------------------------------------------------------------------
+      // TRACK THE SCORE
+      //---------------------------------------------------------------------
+
+        var score = 0;
+
       //---------------------------------------------------------------------
       // VARIABLES FOR THE BALL
       //---------------------------------------------------------------------
@@ -151,6 +158,17 @@
           }
         }
 
+
+      //---------------------------------------------------------------------
+      // DRAW THE SCOREBOARD
+      //---------------------------------------------------------------------
+
+        function drawScore() {
+          ctx.font = "16px Arial";
+          ctx.fillStyle = "#0095DD";
+          ctx.fillText("Score: " + score, 8, 20);
+        }
+
       //---------------------------------------------------------------------
       // COLLISION DETECTION
       //---------------------------------------------------------------------
@@ -163,9 +181,13 @@
                 if ( (x > brick.x) && (x < brick.x + brickWidth) && (y > brick.y) && (y < brick.y + brickHeight) ){
                   dy = -dy
                   brick.status = 0;
+                  score++;
+                  if (score == brickRowCount*brickColumnCount){
+                    alert("YOU WIN, CONGRATULATIONS!");
+                    document.location.reload();
+                  }
                 }
               }
-
             }
           }
         }
@@ -187,6 +209,9 @@
 
           // Draw the Paddle.
           drawPaddle();
+
+          // Draw the Score.
+          drawScore();
 
           // Activate Collision Detection
           collisionDetection();
