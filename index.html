@@ -47,8 +47,8 @@
         var y = canvas.height - 30;
 
         // Define the amount to move.
-        var dx = 2;
-        var dy = -2;
+        var dx = 3.5;
+        var dy = -3.5;
 
       //---------------------------------------------------------------------
       // VARIABLES FOR THE PADDLE
@@ -263,8 +263,8 @@
                 // If the Player still has lives, reset the paddle.
                 x = canvas.width / 2;
                 y = canvas.height - 30;
-                dx = 2;
-                dy = -2;
+                dx = 3.5;
+                dy = -3.5;
                 paddleX = ( canvas.width - paddleWidth ) / 2;
               }
             }
@@ -280,6 +280,10 @@
           x += dx;
           y += dy;
 
+          // The draw functions gets executed again within a loop.
+          // We give control of the framerate back to the browser.
+          // This syncs the framerate and renders shapes only when needed.
+          requestAnimationFrame(draw);
         }
 
       //---------------------------------------------------------------------
@@ -299,7 +303,7 @@
       // RENDRAW EVERY 10 MILISECONDS
       //---------------------------------------------------------------------
 
-        setInterval(draw, 10);
+        draw();
 
     </script>
   </body>
