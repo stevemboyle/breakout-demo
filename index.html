@@ -30,6 +30,12 @@
         var score = 0;
 
       //---------------------------------------------------------------------
+      // CREATE LIVES FOR THE PLAYER
+      //---------------------------------------------------------------------
+
+        var lives = 3;
+
+      //---------------------------------------------------------------------
       // VARIABLES FOR THE BALL
       //---------------------------------------------------------------------
 
@@ -170,10 +176,20 @@
         }
 
       //---------------------------------------------------------------------
+      // DISPLAY USER LIVES
+      //---------------------------------------------------------------------
+
+        function drawLives() {
+          ctx.font = "16px Arial";
+          ctx.fillStyle = "#0095DD";
+          ctx.fillText("Lives: " + lives, canvas.width - 65, 20);
+        }
+
+      //---------------------------------------------------------------------
       // COLLISION DETECTION
       //---------------------------------------------------------------------
 
-        function collisionDetection(){
+        function collisionDetection() {
           for ( column = 0; column < brickColumnCount; column++ ){
             for ( row = 0; row < brickRowCount; row++ ){
               var brick = bricks[column][row];
@@ -213,6 +229,9 @@
           // Draw the Score.
           drawScore();
 
+          // Draw the Lives Dislay
+          drawLives();
+
           // Activate Collision Detection
           collisionDetection();
 
@@ -229,9 +248,25 @@
             if ( x > paddleX && x < paddleX + paddleWidth){
               dy = -dy;
             } else {
-              // If the Ball hits the bottom, the game is over.
-              alert("GAME OVER");
-              document.location.reload();
+
+              // If the Ball hits the bottom, decrease the number of lives.
+              lives--;
+
+              // If the Player is out of lives, the game is over.
+              if (!lives) {
+                alert("GAME OVER");
+                document.location.reload();
+
+
+              } else {
+
+                // If the Player still has lives, reset the paddle.
+                x = canvas.width / 2;
+                y = canvas.height - 30;
+                dx = 2;
+                dy = -2;
+                paddleX = ( canvas.width - paddleWidth ) / 2;
+              }
             }
           }
 
