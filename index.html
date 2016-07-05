@@ -248,6 +248,19 @@
         }
 
       //---------------------------------------------------------------------
+      // LISTEN TO MOUSE MOVEMENT
+      //---------------------------------------------------------------------
+
+        document.addEventListener("mousemove", mouseMoveHandler, false);
+
+        function mouseMoveHandler(event) {
+          var relativeX = event.clientX - canvas.offsetLeft;
+          if ( relativeX > 0 && relativeX < canvas.width) {
+            paddleX = relativeX - paddleWidth/2;
+          }
+        }
+
+      //---------------------------------------------------------------------
       // RENDRAW EVERY 10 MILISECONDS
       //---------------------------------------------------------------------
 
